@@ -202,36 +202,38 @@ hashValue = input("Please Enter your Hash: ")
 #Generate Hashcat command
 os.system(str(clearValue))
 print("Generating Hashcat Command Please Wait")
-unfinishedCommand = str(hashCat) + " --quiet -o " + str(fileOutput) + " --outfile-format " + str(outputType) + " -w " + str(workloadProfile) + " -D " + str(deviceType) + " -a " + str(attackType) + " -m " + str(hashType) + str(hashValue)
-if attackType == 0 and ruleType == 0:
-    hashCommand = str(unfinishedCommand) + " " + str(wordList_1)
-elif attackType == 0 and ruleType == 1:
-    hashCommand = str(unfinishedCommand) + " " + str(wordList_1) + " -r " + str(rules)
-elif attackType == 1:
-    hashCommand = str(unfinishedCommand) + " " + str(wordList_1) + " " + str(wordList_2)
-elif attackType == 3:
-    hashCommand = str(unfinishedCommand) + " " + str(attackMask)
-elif attackType == 6:
-    hashCommand = str(unfinishedCommand) + " " + str(wordList_1) + " " + str(attackMask)
-elif attackType == 7:
-    hashCommand = str(unfinishedCommand) + " " + str(attackMask) + " " + str(wordList_1)
+#unfinishedCommand = hashCat + " --quiet -o " + fileOutput + " --outfile-format " + outputType + " -w " + workloadProfile + " -D " + deviceType + " -a " + attackType + " -m " + hashType + " " + hashValue
+if attackType == "0" and ruleType == "0":
+    #hashCommand = unfinishedCommand + " " + wordList_1
+    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1)
+elif attackType == "0" and ruleType == "1":
+    #hashCommand = unfinishedCommand + " " + wordList_1 + " -r " + rules
+    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {} -r {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,rules)
+elif attackType == "1":
+    #hashCommand = unfinishedCommand + " " + wordList_1 + " " + wordList_2
+    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,wordList_2)
+elif attackType == "3":
+    #hashCommand = unfinishedCommand + " " + attackMask
+    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,attackMask)
+elif attackType == "6":
+    #hashCommand = unfinishedCommand + " " + wordList_1 + " " + attackMask
+    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,attackMask)
+elif attackType == "7":
+    #hashCommand = unfinishedCommand + " " + attackMask + " " + wordList_1
+    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,attackMask,wordList_1)
 time.sleep(3)
 print("Hashcat command generated!")
 print("Command to be run: ")
-print(str(hashCommand))
+print(hashCommand)
 check = input("Would you like to run the command? (Y/N): ")
-runCommand = 0
 if check == "y" or check == "Y":
-    runCommand = 1
+    os.system(str(clearValue))
+    print("Thank you for using this utility")
+    input("Press Enter to run the generated hashcat command: ")
+    os.system(str(hashCommand))
 else:
     print("Thank you for using this utility")
     time.sleep(2)
     print("Exiting in 3 seconds")
     time.sleep(3)
     SystemExit
-
-#Run the Hashcat Command
-os.system(str(clearValue))
-print("Thank you for using this utility")
-input("Press Enter to run the generated hashcat command: ")
-os.system(str(hashCommand))
