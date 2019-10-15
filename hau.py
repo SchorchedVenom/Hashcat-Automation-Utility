@@ -205,22 +205,22 @@ print("Generating Hashcat Command Please Wait")
 #unfinishedCommand = hashCat + " --quiet -o " + fileOutput + " --outfile-format " + outputType + " -w " + workloadProfile + " -D " + deviceType + " -a " + attackType + " -m " + hashType + " " + hashValue
 if attackType == "0" and ruleType == "0":
     #hashCommand = unfinishedCommand + " " + wordList_1
-    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1)
+    hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1)
 elif attackType == "0" and ruleType == "1":
     #hashCommand = unfinishedCommand + " " + wordList_1 + " -r " + rules
-    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {} -r {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,rules)
+    hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {} -r {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,rules)
 elif attackType == "1":
     #hashCommand = unfinishedCommand + " " + wordList_1 + " " + wordList_2
-    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,wordList_2)
+    hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,wordList_2)
 elif attackType == "3":
     #hashCommand = unfinishedCommand + " " + attackMask
-    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,attackMask)
+    hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,attackMask)
 elif attackType == "6":
     #hashCommand = unfinishedCommand + " " + wordList_1 + " " + attackMask
-    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,attackMask)
+    hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,attackMask)
 elif attackType == "7":
     #hashCommand = unfinishedCommand + " " + attackMask + " " + wordList_1
-    hashCommand = "{} --quiet -o {} --outfile-format -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,attackMask,wordList_1)
+    hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,attackMask,wordList_1)
 time.sleep(3)
 print("Hashcat command generated!")
 print("Command to be run: ")
