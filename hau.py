@@ -27,7 +27,8 @@ if operating == "Windows":
     print("Windows Detected")
     print("In order to run the Hashcat Automation Utility we need to determine, ")
     print("where you have hashcat installed.")
-    hashCat = input("Please enter the file path to your hashcat64.exe: ")
+    hashCatPath = input("Please enter the file path to your hashcat64.exe: ")
+    hashCat = "hashcat64"
     time.sleep(5)
 elif operating == "Linux":
     clearValue = "clear"
@@ -43,7 +44,7 @@ elif operating == "Darwin":
     print("OSx Detected")
     print("In order to run the Hashcat Automation Utility we need to determine, ")
     print("where you have hashcat installed.")
-    hashCat = input("Please enter the file path to your hashcat executable: ")
+    hashCatPath = input("Please enter the file path to your hashcat executable: ")
 
 #Hashcat Variables
 deviceType = "1"
@@ -202,24 +203,17 @@ hashValue = input("Please Enter your Hash: ")
 #Generate Hashcat command
 os.system(str(clearValue))
 print("Generating Hashcat Command Please Wait")
-#unfinishedCommand = hashCat + " --quiet -o " + fileOutput + " --outfile-format " + outputType + " -w " + workloadProfile + " -D " + deviceType + " -a " + attackType + " -m " + hashType + " " + hashValue
 if attackType == "0" and ruleType == "0":
-    #hashCommand = unfinishedCommand + " " + wordList_1
     hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1)
 elif attackType == "0" and ruleType == "1":
-    #hashCommand = unfinishedCommand + " " + wordList_1 + " -r " + rules
     hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {} -r {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,rules)
 elif attackType == "1":
-    #hashCommand = unfinishedCommand + " " + wordList_1 + " " + wordList_2
     hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,wordList_2)
 elif attackType == "3":
-    #hashCommand = unfinishedCommand + " " + attackMask
     hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,attackMask)
 elif attackType == "6":
-    #hashCommand = unfinishedCommand + " " + wordList_1 + " " + attackMask
     hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,wordList_1,attackMask)
 elif attackType == "7":
-    #hashCommand = unfinishedCommand + " " + attackMask + " " + wordList_1
     hashCommand = "{} --quiet -o {} --outfile-format {} -w {} -D {} -a {} -m {} {} {}".format(hashCat,fileOutput,outputType,workloadProfile,deviceType,attackType,hashType,hashValue,attackMask,wordList_1)
 time.sleep(3)
 print("Hashcat command generated!")
@@ -230,6 +224,8 @@ if check == "y" or check == "Y":
     os.system(str(clearValue))
     print("Thank you for using this utility")
     input("Press Enter to run the generated hashcat command: ")
+    if operating == "Windows" or operating == "Darwin":
+        os.chdir(str(hashCatPath))
     os.system(str(hashCommand))
 else:
     print("Thank you for using this utility")
